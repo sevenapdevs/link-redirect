@@ -41,7 +41,7 @@ def redirect_link(redirection_link):
         ).fetchone()
 
     if result:
-        return redirect(result[0])
+        return jsonify({"original_link": f"{result}"})
 
     return "Not found", 404
 
