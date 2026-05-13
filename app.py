@@ -19,7 +19,7 @@ def gen_redirect_link(original_link):
         # Generate redirection link
         rndm_link = generate_rndm_link()
 
-        sql = f"""INSERT INTO TABLE links (original_link, redirect_link)
+        sql = f"""INSERT INTO links (original_link, redirect_link)
         VALUES ({original_link}, {rndm_link})
 """
         conn.execute(sql)
