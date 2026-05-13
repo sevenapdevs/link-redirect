@@ -8,7 +8,7 @@ app = Flask(__name__)
 @app.route("/create/<original_link>")
 def gen_redirect_link(original_link):
     with sqlite3.connect("links.db") as conn:
-        conn = conn.cursor()
+        cursor = conn.cursor()
         sql = """CREATE TABLE IF NOT EXISTS links (
             original_link TEXT,
             redirect_link TEXT
