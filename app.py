@@ -14,7 +14,7 @@ def gen_redirect_link(original_link):
             redirect_link TEXT
         )
 """
-        conn.execute(sql)
+        cursor.execute(sql)
 
         # Generate redirection link
         rndm_link = generate_rndm_link()
@@ -22,15 +22,16 @@ def gen_redirect_link(original_link):
         sql = f"""INSERT INTO links (original_link, redirect_link)
         VALUES ({original_link}, {rndm_link})
 """
-        conn.execute(sql)
+        cursor.execute(sql)
 
     return jsonify({"result": "success"})
 
 @app.route("/<redirection_link>")
 def redirect(redirection_link):
     with sqlite3.connect("links.db") as conn:
+        cursor = conn.cursor()
         sql = f"SELECT original_link FROM links WHERE redirect_link={redirection_link}"
-        sql_result = conn.execute(sql)
+        sql_result = cursor.execute(sql)
         fetch_result = sql_result.fetchall()
     return fetch_result
     
